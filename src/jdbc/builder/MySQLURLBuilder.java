@@ -14,21 +14,21 @@ public class MySQLURLBuilder extends JDBCURLBuilder {
 
     @Override
     public String getURL() {
-        StringBuilder str = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
 
-        str.append(MySQLURLBuilder.JDBC + ":");
-        str.append(dbType + "://");
-        str.append(hostAddress + ":");
-        str.append(portNumber + "/");
-        str.append(catalogName + "?");
+        sb.append(MySQLURLBuilder.JDBC + ":");
+        sb.append(dbType + "://");
+        sb.append(hostAddress + ":");
+        sb.append(portNumber + "/");
+        sb.append(catalogName + "?");
         Iterator<Map.Entry<String, String>> it = properties.entrySet().iterator();
         do {
             Map.Entry<String, String> entry = (Entry<String, String>) it.next();
-            str.append(entry.getKey() + "=" + entry.getValue());
+            sb.append(entry.getKey() + "=" + entry.getValue());
             if (it.hasNext()) {
-                str.append("&");
+                sb.append("&");
             }
         } while ((it.hasNext()));
-        return str.toString();
+        return sb.toString();
     }
 }

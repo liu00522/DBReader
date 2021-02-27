@@ -1,5 +1,6 @@
 package jdbc.builder;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
 
@@ -13,6 +14,7 @@ public abstract class JDBCURLBuilder {
     protected String catalogName;
 
     public JDBCURLBuilder() {
+        properties = new LinkedHashMap<>();
     }
 
     //	void setPort( String port);
@@ -37,8 +39,10 @@ public abstract class JDBCURLBuilder {
 
     //  setDB
     protected void setDB(String db) {
-
+        Objects.requireNonNull(db);
+        dbType = db;
     }
+
     //	String getURL();
     public abstract String getURL();
 
@@ -53,7 +57,7 @@ public abstract class JDBCURLBuilder {
     //	void setAddress( String address);
     public void setAddress(String address) {
         Objects.requireNonNull(address);
-        hostAddress = address;
+        this.hostAddress = address;
     }
 
     //	void setCatalog( String catalog);
