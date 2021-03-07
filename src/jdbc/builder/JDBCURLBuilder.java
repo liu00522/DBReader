@@ -23,7 +23,7 @@ public abstract class JDBCURLBuilder {
         try {
             int portNum = Integer.parseInt(port);
             if (portNum < 0) {
-                throw new IllegalArgumentException("negative port number not allowed");
+                throw new IllegalArgumentException("negative port error");
             }
             portNumber = portNum;
         } catch (NumberFormatException e) {

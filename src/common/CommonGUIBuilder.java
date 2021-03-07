@@ -16,55 +16,54 @@ import javafx.scene.layout.Priority;
  * This is bad practice we usually don't want to do this.
  * By using FXML we can remove this class. However, for our need
  * this is sufficient.
- * 
+ * <p>
  * This is a utility class with bunch of static methods for creating
- * some common JavaFX nodes. 
- * 
- * @author Shariar (Shawn) Emami
+ * some common JavaFX nodes.
  *
+ * @author Shariar (Shawn) Emami
  */
 public abstract class CommonGUIBuilder {
 
-	private CommonGUIBuilder() {
-	}
-	
-	public static Button createButton( String name, EventHandler< ActionEvent> onClick) {
-		Button node = new Button( name);
-		node.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE);
-		node.setOnAction( onClick);
-		GridPane.setHgrow( node, Priority.ALWAYS);
-		GridPane.setVgrow( node, Priority.ALWAYS);
-		return node;
-	}
+    private CommonGUIBuilder() {
+    }
 
-	public static TextField createTextField( String value, String name) {
-		TextField node = new TextField( value);
-		node.setPromptText( name);
-		GridPane.setHgrow( node, Priority.ALWAYS);
-		return node;
-	}
+    public static Button createButton(String name, EventHandler<ActionEvent> onClick) {
+        Button node = new Button(name);
+        node.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        node.setOnAction(onClick);
+        GridPane.setHgrow(node, Priority.ALWAYS);
+        GridPane.setVgrow(node, Priority.ALWAYS);
+        return node;
+    }
 
-	public static <T> ComboBox< T> createComboBox( ObservableList< T> value, String name, int selectedIndex) {
-		ComboBox< T> node = new ComboBox<>( value);
-		node.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE);
-		node.setPromptText( name);
-		node.getSelectionModel().select( selectedIndex);
-		GridPane.setHgrow( node, Priority.ALWAYS);
-		return node;
-	}
-	
-	public static <T> ListView< T> createListView( ObservableList< T> list, double height){
-		ListView< T> node = new ListView<>( list);
-		node.setMaxHeight( height);
-		GridPane.setHgrow( node, Priority.ALWAYS);
-		return node;
-	}
+    public static TextField createTextField(String value, String name) {
+        TextField node = new TextField(value);
+        node.setPromptText(name);
+        GridPane.setHgrow(node, Priority.ALWAYS);
+        return node;
+    }
 
-	public static PasswordField createPasswordField( String value, String name) {
-		PasswordField node = new PasswordField();
-		node.setText( value);
-		node.setPromptText( name);
-		GridPane.setHgrow( node, Priority.ALWAYS);
-		return node;
-	}
+    public static <T> ComboBox<T> createComboBox(ObservableList<T> value, String name, int selectedIndex) {
+        ComboBox<T> node = new ComboBox<>(value);
+        node.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        node.setPromptText(name);
+        node.getSelectionModel().select(selectedIndex);
+        GridPane.setHgrow(node, Priority.ALWAYS);
+        return node;
+    }
+
+    public static <T> ListView<T> createListView(ObservableList<T> list, double height) {
+        ListView<T> node = new ListView<>(list);
+        node.setMaxHeight(height);
+        GridPane.setHgrow(node, Priority.ALWAYS);
+        return node;
+    }
+
+    public static PasswordField createPasswordField(String value, String name) {
+        PasswordField node = new PasswordField();
+        node.setText(value);
+        node.setPromptText(name);
+        GridPane.setHgrow(node, Priority.ALWAYS);
+        return node;
+    }
 }

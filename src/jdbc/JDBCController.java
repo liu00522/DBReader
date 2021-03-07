@@ -94,8 +94,8 @@ public class JDBCController implements AutoCloseable {
 
     //	List< List< Object>> getAll() throws SQLException;
     public List<List<Object>> getAll() throws SQLException {
-        List<List<Object>> all = model.getAll(tableInUse.get());
-        return all;
+        List<List<Object>> modelAll = model.getAll(tableInUse.get());
+        return modelAll;
     }
 
     //	List< List< Object>> search( String searchTerm) throws SQLException;

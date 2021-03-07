@@ -194,14 +194,14 @@ public class DBReader extends Application {
         Button searchButton = CommonGUIBuilder.createButton("Search", event -> {
             try {
                 if (!controller.isConnected()) {
-                    connectionStatus.setText("must connect first");
+                    connectionStatus.setText("connect first");
                 } else {
                     connectionStatus.setText("searching");
                     List<List<Object>> list = controller.search(searchText.getText().trim());
                     if (list != null) {
                         connectionStatus.setText("populating table");
                         populateTable(list);
-                        connectionStatus.setText("finished");
+                        connectionStatus.setText("done");
                     }
                 }
             } catch (SQLException ex) {
