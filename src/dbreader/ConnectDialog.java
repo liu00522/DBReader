@@ -78,9 +78,9 @@ public class ConnectDialog {
             controller.addConnectionURLProperty("useUnicode", "true");
             controller.setCredentials(userText.getText(), passText.getText());
             return true;
+        } else {
+            return false;
         }
-
-        return false;
     }
 
     private void createGUI() {

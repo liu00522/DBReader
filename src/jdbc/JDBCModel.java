@@ -1,17 +1,7 @@
 package jdbc;
 
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Objects;
+import java.sql.*;
+import java.util.*;
 
 public class JDBCModel {
 
@@ -75,9 +65,9 @@ public class JDBCModel {
         columnNames.clear();
 
         DatabaseMetaData dbMeta = connection.getMetaData();
-        try (ResultSet rs = dbMeta.getColumns(connection.getCatalog(), null, table, null)) {
-            while (rs.next()) {
-                columnNames.add(rs.getString("COLUMN_NAME"));
+        try (ResultSet results = dbMeta.getColumns(connection.getCatalog(), null, table, null)) {
+            while (results.next()) {
+                columnNames.add(results.getString("COLUMN_NAME"));
             }
         }
         List<String> list = Collections.unmodifiableList(columnNames);
@@ -92,9 +82,9 @@ public class JDBCModel {
         tableNames.clear();
 
         DatabaseMetaData dbMeta = connection.getMetaData();
-        try (ResultSet rs = dbMeta.getTables(connection.getCatalog(), null, null, new String[]{"TABLE"})) {
-            while (rs.next()) {
-                tableNames.add(rs.getString("TABLE_NAME"));
+        try (ResultSet results = dbMeta.getTables(connection.getCatalog(), null, null, new String[]{"TABLE"})) {
+            while (results.next()) {
+                tableNames.add(results.getString("TABLE_NAME"));
             }
         }
         List<String> list = Collections.unmodifiableList(tableNames);
@@ -125,30 +115,30 @@ public class JDBCModel {
     }
 
     private String buildSQLSearchQuery(String table, boolean withParameters) {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder builder = new StringBuilder();
 
-        sb.append("select * from " + table);
+        builder.append("select * from " + table);
         if (withParameters) {
-            sb.append(" where ");
+            builder.append(" where ");
             Iterator<String> it = columnNames.iterator();
             do {
                 String entry = it.next();
-                sb.append(entry + " like ?");
+                builder.append(entry + " like ?");
                 if (it.hasNext()) {
-                    sb.append(" or ");
+                    builder.append(" or ");
                 }
 
             } while (it.hasNext());
         }
-        return sb.toString();
+        return builder.toString();
     }
 
     private void extractRowsFromResultSet(PreparedStatement ps, List<List<Object>> list) throws SQLException {
-        try (ResultSet rs = ps.executeQuery()) {
-            while (rs.next()) {
+        try (ResultSet results = ps.executeQuery()) {
+            while (results.next()) {
                 List<Object> row = new ArrayList<>();
                 for (int i = 1; i <= columnNames.size(); i++) {
-                    row.add(rs.getObject(i));
+                    row.add(results.getObject(i));
                 }
                 list.add(row);
             }

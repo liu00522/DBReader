@@ -6,7 +6,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import jdbc.builder.JDBCURLBuilder;
 
-import javax.net.ssl.SSLException;
 import java.sql.SQLException;
 import java.util.List;
 

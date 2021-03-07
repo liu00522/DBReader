@@ -243,13 +243,13 @@ public class DBReader extends Application {
         //each TableColumn needs to have a CellValueFactory.
         //method data.getValue() return the list we added in second line of this method.
         for (String col : controller.getColumnNames()) {
-            TableColumn<Object, Object> tc = new TableColumn<>(col);
+            TableColumn<Object, Object> tableColumn = new TableColumn<>(col);
 
             int index = i;
-            tc.setCellValueFactory((CellDataFeatures<Object, Object> data) -> new SimpleObjectProperty<>(
+            tableColumn.setCellValueFactory((CellDataFeatures<Object, Object> data) -> new SimpleObjectProperty<>(
                     ((List<?>) data.getValue()).get(index)));
             i++;
-            table.getColumns().add(tc);
+            table.getColumns().add(tableColumn);
         }
     }
 
